@@ -5,6 +5,4 @@ const router = express.Router()
 const EntradaController = require('../src/controller/EntradaController')
 //routers
 router.post('/entrada', EntradaController.newEntrada)
-
-
 module.exports = router

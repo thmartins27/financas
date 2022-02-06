@@ -9,15 +9,21 @@ class EntradaController{
     }
 
     static async newEntrada(req, res){
-        /* const {origem} = req.body
-        const {valor} = req.body
-        const {dataEntrada} = req.body
-        const {tipo} = req.body */
-
         const json = {erro: '', result: []}
         const {origem, valor, dataEntrada, tipo} = req.body
         const entradaObj = new EntradaController(origem, valor, dataEntrada, tipo)
-        const entrada = await EntradaModule.newEntrada(entradaObj)
+        try{
+            const entrada = await EntradaModule.newEntrada(entradaObj)
+            if(entrada.affectedRows != 0) json.result.push({
+                cadastro: true,
+                message: 'Dados cadastrados com sucesso'
+            })
+            else throw 'Dados não cadastrados'
+        }catch(e){
+            json.erro = e
+            console.log(e)
+        }
+        res.json(json)
     }
 }
 
