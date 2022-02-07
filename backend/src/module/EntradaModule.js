@@ -7,16 +7,25 @@ class EntradaModule {
 
         return new Promise((resolve, reject) => {
             try {
-                db.query(`insert into entrada(origem, valor, data_entrada, tipo)
-                values(?, ?, ?, ?)`, [origem, valor, dataEntrada, tipo], (erro, result) => {
-                    if (erro) reject(erro)
+                db.query(`call newEntrada(?, ?, ?, ?)`, [origem, valor, dataEntrada, tipo], (erro, result) => {
+                    if(erro) reject(erro)
                     resolve(result)
                 })
-
             } catch (erro) {
+                console.log(erro)}
+        })
+    }
+
+    static allEntrada(){
+        return new Promise((resolve, reject) => {
+            try{
+                db.query(`call allEntrada()`, (erro, results) => {
+                    if(erro) throw erro
+                    resolve(results)
+                })
+            }catch(erro){
+                reject(erro)
                 console.log(erro)
-            } finally {
-                db.end()
             }
         })
     }

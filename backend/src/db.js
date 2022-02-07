@@ -1,7 +1,11 @@
 const mysql = require('mysql2')
 const dotenv = require('dotenv')
 dotenv.config(
-    { path: '/mnt/NALGRIM/projetos/financas/backend/src/.db.env' }
+    { path: 'D:/financas/financas/backend/src/.db.env' }
+    //caminho maedhros
+    //'/mnt/NALGRIM/projetos/financas/backend/src/.db.env'
+    //caminho Feanor
+    //'D:/financas/financas/backend/src/.db.env'
 )
 
 const connection = mysql.createConnection({
